@@ -1,0 +1,241 @@
+:root {
+  --red: #c1121f;
+  --dark-red: #780000;
+  --black: #0d0d0d;
+  --paper: #f5ecd9;
+  --gold: #d4a017;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  font-family: "Noto Serif JP", Georgia, serif;
+  background: radial-gradient(circle at top, var(--dark-red), var(--black) 70%);
+  color: var(--paper);
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Rising sun in the corner */
+.sun {
+  position: fixed;
+  top: -120px;
+  right: -120px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: var(--red);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+/* Main card */
+.scroll {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  height: fit-content;
+  background: rgba(13, 13, 13, 0.88);
+  border: 2px solid var(--red);
+  border-top: 8px solid var(--red);
+  border-bottom: 8px solid var(--red);
+  padding: 32px 28px;
+  box-shadow: 0 0 40px rgba(193, 18, 31, 0.45);
+}
+
+header { text-align: center; margin-bottom: 24px; }
+
+.kanji {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--red);
+  text-shadow: 0 0 18px rgba(193, 18, 31, 0.8);
+}
+
+h1 {
+  font-size: 1.4rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.tagline {
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+}
+
+/* Form */
+form { display: flex; gap: 8px; }
+
+input {
+  flex: 1;
+  padding: 12px 14px;
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 2px;
+  color: var(--paper);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--red);
+  box-shadow: 0 0 8px var(--red);
+}
+
+button { cursor: pointer; font-family: inherit; border: none; transition: 0.2s; }
+
+form button {
+  background: var(--red);
+  color: var(--paper);
+  padding: 0 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%); /* slanted blade shape */
+}
+
+form button:hover { background: #e01e2c; }
+
+/* Katana blade divider */
+.katana-line {
+  height: 3px;
+  margin: 24px 0 16px;
+  background: linear-gradient(90deg, transparent, #ccc, var(--red), #ccc, transparent);
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-bottom: 12px;
+}
+
+#clear-done {
+  background: none;
+  color: var(--gold);
+  text-decoration: underline;
+  font-size: 0.85rem;
+}
+
+/* Task list */
+ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #161616;
+  border-left: 5px solid var(--red);
+  animation: slide 0.25s ease;
+}
+
+li:hover { background: #1f1f1f; }
+
+li span { flex: 1; cursor: pointer; word-break: break-word; }
+
+li.done { border-left-color: var(--gold); }
+li.done span { text-decoration: line-through; opacity: 0.45; }
+
+li.empty { justify-content: center; color: #777; border-left-color: transparent; }
+
+.delete { background: none; color: var(--red); font-size: 1.3rem; }
+.delete:hover { color: #fff; }
+
+@keyframes slide {
+  from { opacity: 0; transform: translateX(-15px); }
+  to   { opacity: 1; transform: none; }
+}
+/* ---------- Background animation ---------- */
+
+/* Sun gently pulses */
+.sun {
+  animation: pulse 6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);    opacity: 0.35; }
+  50%      { transform: scale(1.08); opacity: 0.5; }
+}
+
+/* Petal layer sits behind the card */
+.petals {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.petal {
+  position: absolute;
+  top: -40px;
+  background: linear-gradient(135deg, #e128a0, var(--red));
+  border-radius: 150% 0 150% 0;   /* petal shape */
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(40px, 28vh) rotate(90deg); }
+  50%  { transform: translate(-20px, 55vh) rotate(180deg); }
+  75%  { transform: translate(50px, 80vh) rotate(270deg); }
+  100% { transform: translate(0, 110vh) rotate(360deg); }
+}
+/* ---------- Tree + temple scene ---------- */
+.scene {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tree {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 80vh;
+  max-height: 600px;
+  filter: drop-shadow(0 0 25px rgba(255, 143, 171, 0.35));
+}
+
+.temple {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  width: 340px;
+  filter: drop-shadow(0 0 25px rgba(212, 160, 23, 0.3));
+}
+
+/* Blossoms sway gently in the wind */
+.blossoms {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: sway 7s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50%      { transform: rotate(1.5deg); }
+}
+
+/* Smaller, softer scene on phones and narrow screens */
+@media (max-width: 900px) {
+  .tree   { height: 55vh; opacity: 0.6; }
+  .temple { width: 200px; opacity: 0.6; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blossoms, .sun { animation: none; }
+}

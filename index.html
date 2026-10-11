@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samurai To-Do List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="sun"></div>
+
+  <!-- NEW: tree + temple scene -->
+  <div class="scene">
+
+    <!-- Cherry blossom tree (left) -->
+    <svg class="tree" viewBox="0 0 320 520" xmlns="http://www.w3.org/2000/svg">
+      <!-- trunk and branches -->
+      <g fill="none" stroke="#4a2a1a" stroke-linecap="round">
+        <path d="M115 520 C125 450 105 400 130 340 C145 300 125 260 100 215" stroke-width="26"/>
+        <path d="M130 340 C170 310 215 290 270 235" stroke-width="12"/>
+        <path d="M118 270 C80 240 50 230 20 185" stroke-width="10"/>
+        <path d="M100 215 C110 170 135 140 150 95" stroke-width="10"/>
+        <path d="M215 275 C230 240 235 215 225 180" stroke-width="7"/>
+        <path d="M60 232 C55 205 65 180 80 160" stroke-width="6"/>
+      </g>
+
+      <!-- blossoms (this group sways) -->
+      <g class="blossoms">
+        <g fill="#ffb7c5" opacity="0.88">
+          <circle cx="270" cy="235" r="40"/>
+          <circle cx="225" cy="180" r="38"/>
+          <circle cx="150" cy="95" r="44"/>
+          <circle cx="25" cy="185" r="36"/>
+          <circle cx="80" cy="160" r="34"/>
+          <circle cx="100" cy="215" r="32"/>
+          <circle cx="200" cy="285" r="30"/>
+          <circle cx="130" cy="150" r="34"/>
+          <circle cx="185" cy="135" r="30"/>
+          <circle cx="60" cy="225" r="28"/>
+          <circle cx="290" cy="265" r="26"/>
+        </g>
+        <g fill="#ff8fab" opacity="0.8">
+          <circle cx="260" cy="225" r="16"/>
+          <circle cx="215" cy="170" r="14"/>
+          <circle cx="145" cy="85" r="18"/>
+          <circle cx="30" cy="180" r="14"/>
+          <circle cx="85" cy="155" r="13"/>
+          <circle cx="195" cy="280" r="12"/>
+          <circle cx="125" cy="145" r="14"/>
+        </g>
+        <g fill="#ffe3ea" opacity="0.9">
+          <circle cx="280" cy="245" r="10"/>
+          <circle cx="235" cy="190" r="9"/>
+          <circle cx="160" cy="105" r="11"/>
+          <circle cx="15" cy="195" r="9"/>
+          <circle cx="95" cy="170" r="8"/>
+          <circle cx="190" cy="125" r="9"/>
+        </g>
+      </g>
+    </svg>
+
+    <!-- Japanese temple (right) -->
+    <svg class="temple" viewBox="0 0 320 330" xmlns="http://www.w3.org/2000/svg">
+      <!-- platform -->
+      <rect x="10" y="310" width="300" height="18" fill="#2b2b2b"/>
+      <rect x="30" y="296" width="260" height="14" fill="#3a3a3a"/>
+
+      <!-- finial on top -->
+      <rect x="158" y="38" width="4" height="52" fill="#d4a017"/>
+      <circle cx="160" cy="52" r="5" fill="#d4a017"/>
+      <circle cx="160" cy="66" r="5" fill="#d4a017"/>
+
+      <!-- top level -->
+      <rect x="125" y="132" width="70" height="20" fill="#f5ecd9"/>
+      <rect x="125" y="132" width="8" height="20" fill="#d62828"/>
+      <rect x="187" y="132" width="8" height="20" fill="#d62828"/>
+      <path d="M85 122 Q125 124 145 90 L175 90 Q195 124 235 122 L220 134 L100 134 Z"
+            fill="#1a1a1a" stroke="#d4a017" stroke-width="2"/>
+
+      <!-- middle level -->
+      <rect x="95" y="200" width="130" height="30" fill="#f5ecd9"/>
+      <rect x="95" y="200" width="10" height="30" fill="#d62828"/>
+      <rect x="155" y="200" width="10" height="30" fill="#d62828"/>
+      <rect x="215" y="200" width="10" height="30" fill="#d62828"/>
+      <path d="M45 190 Q85 192 108 152 L212 152 Q235 192 275 190 L258 202 L62 202 Z"
+            fill="#1a1a1a" stroke="#d4a017" stroke-width="2"/>
+
+      <!-- bottom level -->
+      <rect x="50" y="278" width="220" height="32" fill="#f5ecd9"/>
+      <rect x="50" y="278" width="10" height="32" fill="#d62828"/>
+      <rect x="105" y="278" width="10" height="32" fill="#d62828"/>
+      <rect x="205" y="278" width="10" height="32" fill="#d62828"/>
+      <rect x="260" y="278" width="10" height="32" fill="#d62828"/>
+      <rect x="140" y="284" width="40" height="26" fill="#5a0a0a"/>
+      <path d="M0 267 Q42 270 66 230 L254 230 Q278 270 320 267 L300 280 L20 280 Z"
+            fill="#1a1a1a" stroke="#d4a017" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <div class="petals" id="petals"></div>
+
+  <main class="scroll">
+    <header>
+      <p class="kanji">侍</p>
+      <h1>My To-Do List</h1>
+      <p class="tagline">Stay focused. Get it done.</p>
+    </header>
+
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="Add a new task..." autocomplete="off" required />
+      <button type="submit">Add 追加</button>
+    </form>
+
+    <div class="katana-line"></div>
+
+    <div class="stats">
+      <span id="count">0 tasks remaining</span>
+      <button id="clear-done">Clear completed</button>
+    </div>
+
+    <ul id="task-list"></ul>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
